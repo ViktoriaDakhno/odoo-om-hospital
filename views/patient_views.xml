@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!-- 1. Деревоподібний список (Tree/List View) -->
+    <record id="view_hospital_patient_tree" model="ir.ui.view">
+        <field name="name">hospital.patient.tree</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <tree string="Patients">
+                <field name="name"/>
+                <field name="gender"/>
+                <field name="date_of_birth"/>
+                <field name="doctor_id"/>
+                <field name="is_discharged"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- 2. Форма (Form View) -->
+    <record id="view_hospital_patient_form" model="ir.ui.view">
+        <field name="name">hospital.patient.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form string="Patient">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="gender"/>
+                            <field name="date_of_birth"/>
+                        </group>
+                        <group>
+                            <field name="doctor_id"/>
+                            <field name="is_discharged"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Story" name="story">
+                            <field name="story"/>
+                        </page>
+                        <page string="Symptoms" name="symptoms">
+                            <field name="symptom_ids" widget="many2many_tags"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- 3. Дія (Action) -->
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_sailing_face">
+                Create a new patient record
+            </p>
+        </field>
+    </record>
+
+</odoo>
